@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        function show() {
+            var f1 = "{{f1}}";
+            var f2 = "{{f2}}";
+            var fo = new FormData();
+            fo.append("f1", f1);
+            fo.append("f2", f2);
+            var xmlhttp;
+            if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp = new XMLHttpRequest();
+            } else {// code for IE6, IE5
+                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp.onreadystatechange = function () {
+                if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+                    document.getElementById("img").innerHTML = `<img src="data:image/jpg;base64,${xmlhttp.responseText}" />`;
+                }
+                else if (xmlhttp.readyState !== 4)
+                    document.getElementById("img").innerHTML = "正在运行中...";
+                else
+                    document.getElementById("img").innerHTML = "出现错误";
+            };
+            xmlhttp.open("GET", "get?f1="+f1+"&f2="+f2, true);
+            xmlhttp.send();
+        }
+    </script>
+</head>
+<body onload="show()">
+    <div id="img">
+    </div>
+</body>
+</html>
