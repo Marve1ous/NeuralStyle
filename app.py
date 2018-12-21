@@ -30,13 +30,12 @@ def get():
     f2 = request.args.get('f2')  # file2
     print(f1, f2)
     s = f1.split('/')[1].split('.')[0] + '_' + f2.split('/')[1]
-    name = os.path.join('out', s)
+    name = os.path.join('static', 'out', s)
     content_path = f1
     style_path = f2
     run(content_path=content_path, style_path=style_path, path=name, num_iterations=100)
-    img = open(name, 'rb').read()
-    base = base64.b64encode(img)
-    return base
+    # 取消base64返回格式, 返回图片路径
+    return name
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -45,4 +44,4 @@ def index():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0')
+    app.run(debug=True, host='0.0.0.0')

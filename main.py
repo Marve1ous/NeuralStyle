@@ -341,7 +341,7 @@ if __name__ == '__main__':
     # 动态图
     tf.enable_eager_execution()
     # 图片路径
-    content_path = 'content/001.jpg'
+    content_path = 'content/content.jpg'
     style_path = 'style/style5.jpg'
     plt.figure(figsize=(10, 10))
 
@@ -372,7 +372,7 @@ if __name__ == '__main__':
     num_content_layers = len(content_layers)
     num_style_layers = len(style_layers)
 
-    best, best_loss = run_style_transfer(content_path, style_path, num_iterations=100)
+    best, best_loss = run_style_transfer(content_path, style_path, num_iterations=1000)
 
     import base64
     be = base64.b64encode(best)

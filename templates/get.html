@@ -3,6 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        * {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
     <script>
         function show() {
             var f1 = "{{f1}}";
@@ -18,10 +26,11 @@
             }
             xmlhttp.onreadystatechange = function () {
                 if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
-                    document.getElementById("img").innerHTML = `<img src="data:image/jpg;base64,${xmlhttp.responseText}" />`;
+                    // document.getElementById("img").innerHTML = `<img src="data:image/jpg;base64,${xmlhttp.responseText}" />`;
+                    document.getElementById("img").innerHTML = `<img src="${xmlhttp.responseText}" width="100%" height="auto"/>`;
                 }
                 else if (xmlhttp.readyState !== 4)
-                    document.getElementById("img").innerHTML = "正在运行中...";
+                    document.getElementById("img").innerHTML = "<h1 style='color: coral;'>正在运行中...</h1>";
                 else
                     document.getElementById("img").innerHTML = "出现错误";
             };
@@ -31,7 +40,7 @@
     </script>
 </head>
 <body onload="show()">
-    <div id="img">
+    <div id="img" style="width: 100%">
     </div>
 </body>
 </html>
