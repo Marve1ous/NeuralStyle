@@ -9,56 +9,40 @@
             padding: 0;
             text-align: center;
         }
-
-        html {
+        html{
             height: 100%;
             width: 100%;
-            background: url('../static/back.jpg') space;
-            background-size: 100% 100%;
+        }
+        body {
+            height: 100%;
+            width: 100%;
         }
 
-        h1 {
-            margin-top: 6%;
-            margin-bottom: 4%;
-            font-size: 50px;
-            color: white;
+        .bg {
+            float: left;
+            width: 100%;
+            background:url('../static/back.jpg') repeat center;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
         }
-
-        div {
+        .bg-bulr{
+            -webkit-filter: blur(15px);
+            -moz-filter: blur(15px);
+            -o-filter: blur(15px);
+            -ms-filter: blur(15px);
+            filter: blur(15px);
+        }
+        #img1,#img2{
             border: 2px dashed #bbb;
             border-radius: 5px;
             text-align: center;
             color: #bbb;
-            height: 500px;
+            height: 300px;
             width: 99%;
             padding: 0;
             margin: 0;
         }
-
-        span {
-            border: 2px darkmagenta solid;
-            border-radius: 5px;
-            font-size: 20px;
-            color: white;
-            background-color: deeppink;
-            padding: 5px;
-        }
-
-        td {
-            padding-top: 18px;
-            padding-left: 0;
-            width: 30%;
-        }
-
-        th {
-            font-size: 30px;
-            color: gold;
-        }
-
-        iframe {
-            border: 0;
-        }
-
     </style>
     <script>
         function deal(id) {
@@ -68,69 +52,90 @@
                 var name = "img" + id[1];
                 var img = document.getElementById(name);
                 reader.onload = function () {
-                    img.innerHTML = `<img src=${this.result} width="100%" height="100%" alt="content"/>`
+                    img.innerHTML = `<img src=${this.result} width="100%" height="100%" alt="content" class="img-rounded"/>`
                 };
                 reader.readAsDataURL(f);
             }
         }
+
+        function loadFile(file){
+            $("#filename").html(file.name);
+        }
     </script>
-</head>
-<body>
-<h1>图像风格迁移</h1>
-<form action="upload" enctype="multipart/form-data" id="form1" method="POST" target="img">
-    <table border="0" width="100%">
-        <tbody>
-        <tr>
-            <th>内容图</th>
-            <th>风格图</th>
-            <th>迁移图</th>
-        </tr>
-        <tr>
-            <td>
-                <div id="img1">
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
+<!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script></head>
+<body class="bg">
+    <div class="container">
+        <div class="row">
+            <br><br>
+            <h1 style="margin: 0px">图像风格迁移</h1>
+        </div>
+        <form action="upload" enctype="multipart/form-data" id="form1" method="POST" target="img">
+            <div class="row">
+                <div class="col-md-4">
+                    <h3>内容图</h3>
+                    <div id="img1">
+
+                    </div>
+                    <div class="file-container" style="display:inline-block;position:relative;overflow: hidden;vertical-align:middle">
+                        <button class="btn btn-primary fileinput-button" type="button">上传</button>
+                        <input type="file" id="f1" onchange="deal(this.id)" style="position:absolute;top:0;left:0;font-size:34px; opacity:0">
+                    </div>
                 </div>
-            </td>
-            <td>
-                <div id="img2">
+                <div class="col-md-4">
+                    <h3>风格图</h3>
+                    <div id="img2">
 
+                    </div>
+                    <div class="file-container" style="display:inline-block;position:relative;overflow: hidden;vertical-align:middle">
+                        <button class="btn btn-primary fileinput-button" type="button">上传</button>
+                        <input type="file" id="f2" onchange="deal(this.id)" style="position:absolute;top:0;left:0;font-size:34px; opacity:0">
+                    </div>
                 </div>
-            </td>
-            <td>
-                <div >
-                    <iframe id="fram" name="img" width="100%" height="100%" scrolling="no">
-                    </iframe>
+                <div class="col-md-4">
+                    <h3>迁移图</h3>
+                    <div >
+                        <iframe id="fram" name="img" width="100%" height="300px" scrolling="no">
+                        </iframe>
+                        <span  class="btn btn-success">确认上传</span>
+                        <input hidden type="submit" value="上传"/>
+                        <span  class="btn btn-danger">重新上传</span>
+                        <input hidden type="reset" value="重新上传"/>
+                    </div>
                 </div>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <label>
-                    <span>上传图片</span>
-                    <input accept="image/*" hidden id="f1" name="file1" required type="file" onchange="deal(this.id)"/>
-                </label>
-            </td>
-            <td>
-                <label>
-                    <span>上传图片</span>
-                    <input accept="image/*" hidden id="f2" name="file2" required type="file" onchange="deal(this.id)"/>
-                </label>
-            </td>
-            <td>
-                <label style="margin-right: 10px">
-                    <span>确认上传</span>
-                    <input hidden type="submit" value="上传"/>
-                </label>
-                <label>
-                    <span>重新上传</span>
-                    <input hidden type="reset" value="重新上传"/>
-                </label>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-</form>
-
-
+            </div>
+        </form>
+        <div class="row">
+            <div class="col-md-3">
+            </div>
+            <div class="col-md-1">
+                <a href="#" class="thumbnail" onclick="deal(1)"><img src="../style/style1.jpg"></a>
+            </div>
+            <div class="col-md-1">
+                <a href="#" class="thumbnail" onclick="deal(1)"><img src="../style/style1.jpg"></a>
+            </div>
+            <div class="col-md-1">
+                <a href="#" class="thumbnail" onclick="deal(1)"><img src="../style/style1.jpg"></a>
+            </div>
+            <div class="col-md-1">
+                <a href="#" class="thumbnail" onclick="deal(1)"><img src="../style/style1.jpg"></a>
+            </div>
+            <div class="col-md-1">
+                <a href="#" class="thumbnail" onclick="deal(1)"><img src="../style/style1.jpg"></a>
+            </div>
+            <div class="col-md-1">
+                <a href="#" class="thumbnail" onclick="deal(1)"><img src="../style/style1.jpg"></a>
+            </div>
+            <div class="col-md-3">
+            </div>
+        `</div>
+    </div>
 </body>
 </html>
