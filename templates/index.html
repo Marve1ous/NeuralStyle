@@ -31,7 +31,7 @@
             -ms-filter: blur(15px);
             filter: blur(15px);
         }
-        #img1,#img2{
+        #img1,#img2,#fram{
             border: 2px dashed #bbb;
             border-radius: 5px;
             text-align: center;
@@ -54,8 +54,9 @@
             width: 100%;
             height: 100%;
         }
-        /* .container{
-            background-color:blanchedalmond;
+        /* .thumbnail{
+            width: 100px;
+            height: 100px;
         } */
     </style>
     <script>
@@ -71,7 +72,12 @@
                 reader.readAsDataURL(f);
             }
         }
-
+        
+        function putlocalstylepic(id){
+            imgpath = document.getElementById(id).innerHTML.split("\"")[1];
+            console.log(imgpath)
+            document.getElementById('img2').innerHTML=`<img src="`+imgpath+ `" width="100%" height="100%" alt="content" class="img-rounded"/>`;
+        }
         function loadFile(file){
             $("#filename").html(file.name);
         }
@@ -166,7 +172,7 @@
                 </div>
                 <div class="col-md-4">
                     <h3>迁移图</h3>
-                    <div >
+                    <div>
                         <iframe id="fram" name="img" width="100%" height="300px" scrolling="no">
                         </iframe>
                         <span  class="btn btn-success">确认上传</span>
@@ -183,22 +189,22 @@
             <div class="col-md-3">
             </div>
             <div class="col-md-1">
-                <a href="#" class="thumbnail" onclick="deal(1)"><img src="../style/style1.jpg"></a>
+                <a href="#" class="thumbnail" id="p1" onclick="putlocalstylepic('p1')" style="margin:0px"><img src="../style/style1.jpg"></a>
             </div>
             <div class="col-md-1">
-                <a href="#" class="thumbnail" onclick="deal(1)"><img src="../style/style1.jpg"></a>
+                <a href="#" class="thumbnail" id="p2" onclick="putlocalstylepic('p2')" style="margin:0px"><img src="../style/style2.jpg"></a>
             </div>
             <div class="col-md-1">
-                <a href="#" class="thumbnail" onclick="deal(1)"><img src="../style/style1.jpg"></a>
+                <a href="#" class="thumbnail" id="p3" onclick="putlocalstylepic('p3')" style="margin:0px"><img src="../style/style3.jpg"></a>
             </div>
             <div class="col-md-1">
-                <a href="#" class="thumbnail" onclick="deal(1)"><img src="../style/style1.jpg"></a>
+                <a href="#" class="thumbnail" id="p4" onclick="putlocalstylepic('p4')" style="margin:0px"><img src="../style/style4.jpg"></a>
             </div>
             <div class="col-md-1">
-                <a href="#" class="thumbnail" onclick="deal(1)"><img src="../style/style1.jpg"></a>
+                <a href="#" class="thumbnail" id="p5" onclick="putlocalstylepic('p5')" style="margin:0px"><img src="../style/style5.jpg"></a>
             </div>
             <div class="col-md-1">
-                <a href="#" class="thumbnail" onclick="deal(1)"><img src="../style/style1.jpg"></a>
+                <a href="#" class="thumbnail" id="p6" onclick="putlocalstylepic('p6')" style="margin:0px"><img src="../style/style1.jpg"></a>
             </div>
             <div class="col-md-3">
             </div>
