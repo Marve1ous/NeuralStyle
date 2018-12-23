@@ -78,6 +78,10 @@
             console.log(imgpath)
             document.getElementById('img2').innerHTML=`<img src="`+imgpath+ `" width="100%" height="100%" alt="content" class="img-rounded"/>`;
         }
+        function resetpic() {
+            document.getElementById('img1').innerHTML="";
+            document.getElementById('img2').innerHTML="";
+        }
         function loadFile(file){
             $("#filename").html(file.name);
         }
@@ -113,21 +117,21 @@
                 <!-- Wrapper for slides -->
                 <div class="carousel-inner" role="listbox">
                     <div class="item active">
-                        <img class="carousel-img" src="../style/style1.jpg" alt="...">
+                        <img class="carousel-img" src="../static/style1.jpg" alt="...">
                         <div class="carousel-caption">
                             <h3>我们的作品</h3>
                             <h4>Pic1</h4>
                         </div>
                     </div>
                     <div class="item">
-                        <img class="carousel-img" src="../style/style2.jpg" alt="...">
+                        <img class="carousel-img" src="../static/style2.jpg" alt="...">
                         <div class="carousel-caption">
                             <h3>我们的作品</h3>
                             <h4>Pic1</h4>
                         </div>
                     </div>
                     <div class="item">
-                        <img class="carousel-img" src="../style/style3.jpg" alt="...">
+                        <img class="carousel-img" src="../static/style3.jpg" alt="...">
                         <div class="carousel-caption">
                             <h3>我们的作品</h3>
                             <h4>Pic1</h4>
@@ -157,7 +161,7 @@
                     </div>
                     <div class="file-container" style="display:inline-block;position:relative;overflow: hidden;vertical-align:middle">
                         <button class="btn btn-primary fileinput-button" type="button">上传</button>
-                        <input type="file" id="f1" onchange="deal(this.id)" style="position:absolute;top:0;left:0;font-size:34px; opacity:0">
+                        <input type="file" id="f1" name="file1" onchange="deal(this.id)" style="position:absolute;top:0;left:0;font-size:34px; opacity:0">
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -167,7 +171,7 @@
                     </div>
                     <div class="file-container" style="display:inline-block;position:relative;overflow: hidden;vertical-align:middle">
                         <button class="btn btn-primary fileinput-button" type="button">上传</button>
-                        <input type="file" id="f2" onchange="deal(this.id)" style="position:absolute;top:0;left:0;font-size:34px; opacity:0">
+                        <input type="file" id="f2" name="file2" onchange="deal(this.id)" style="position:absolute;top:0;left:0;font-size:34px; opacity:0">
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -175,10 +179,8 @@
                     <div>
                         <iframe id="fram" name="img" width="100%" height="300px" scrolling="no">
                         </iframe>
-                        <span  class="btn btn-success">确认上传</span>
-                        <input hidden type="submit" value="上传"/>
-                        <span  class="btn btn-danger">重新上传</span>
-                        <input hidden type="reset" value="重新上传"/>
+                        <input class="btn btn-success" type="submit" value="上传"/>
+                        <input class="btn btn-danger" type="reset" onclick="resetpic()" value="重新上传"/>
                     </div>
                 </div>
             </form>
@@ -189,22 +191,22 @@
             <div class="col-md-3">
             </div>
             <div class="col-md-1">
-                <a href="#" class="thumbnail" id="p1" onclick="putlocalstylepic('p1')" style="margin:0px"><img src="../style/style1.jpg"></a>
+                <div class="thumbnail" id="p1" onclick="putlocalstylepic('p1')" style="margin:0px"><img src="../static/style1.jpg"></div>
             </div>
             <div class="col-md-1">
-                <a href="#" class="thumbnail" id="p2" onclick="putlocalstylepic('p2')" style="margin:0px"><img src="../style/style2.jpg"></a>
+                <div class="thumbnail" id="p2" onclick="putlocalstylepic('p2')" style="margin:0px"><img src="../static/style2.jpg"></div>
             </div>
             <div class="col-md-1">
-                <a href="#" class="thumbnail" id="p3" onclick="putlocalstylepic('p3')" style="margin:0px"><img src="../style/style3.jpg"></a>
+                <div class="thumbnail" id="p3" onclick="putlocalstylepic('p3')" style="margin:0px"><img src="../static/style3.jpg"></div>
             </div>
             <div class="col-md-1">
-                <a href="#" class="thumbnail" id="p4" onclick="putlocalstylepic('p4')" style="margin:0px"><img src="../style/style4.jpg"></a>
+                <div class="thumbnail" id="p4" onclick="putlocalstylepic('p4')" style="margin:0px"><img src="../static/style4.jpg"></div>
             </div>
             <div class="col-md-1">
-                <a href="#" class="thumbnail" id="p5" onclick="putlocalstylepic('p5')" style="margin:0px"><img src="../style/style5.jpg"></a>
+                <div class="thumbnail" id="p5" onclick="putlocalstylepic('p5')" style="margin:0px"><img src="../static/style5.jpg"></div>
             </div>
             <div class="col-md-1">
-                <a href="#" class="thumbnail" id="p6" onclick="putlocalstylepic('p6')" style="margin:0px"><img src="../style/style1.jpg"></a>
+                <div class="thumbnail" id="p6" onclick="putlocalstylepic('p6')" style="margin:0px"><img src="../static/style1.jpg"></div>
             </div>
             <div class="col-md-3">
             </div>
