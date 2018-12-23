@@ -9,19 +9,19 @@
             padding: 0;
             text-align: center;
         }
-        html{
-            height: 100%;
+        html,body{
+            height:max-content;
             width: 100%;
+            position: absolute;
         }
-        body {
-            height: 100%;
-            width: 100%;
-        }
-
         .bg {
+            position:absolute;
             float: left;
+            z-index: -100;
+            height: 100%;
             width: 100%;
-            background:url('../static/back.jpg') repeat;
+            background:url('../static/back.jpg');
+            background-repeat:  repeat;
             background-size: cover;
         }
         .bg-bulr{
@@ -54,6 +54,9 @@
             width: 100%;
             height: 100%;
         }
+        /* .container{
+            background-color:blanchedalmond;
+        } */
     </style>
     <script>
         function deal(id) {
@@ -82,7 +85,10 @@
 
 <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script></head>
-<body class="bg">
+<body>
+    <div class="bg bg-bulr">
+
+    </div>
     <div class="container">
         <!-- 标题 -->
         <div class="row">
@@ -173,6 +179,7 @@
         </div>
         
         <div class="row">
+            <h3>备选风格图</h3>
             <div class="col-md-3">
             </div>
             <div class="col-md-1">
