@@ -278,7 +278,7 @@ def show_results(best_img, content_path, style_path, show_large_final=True):
         plt.show()
 
 
-def run(content_path='content/a.jpg', style_path='style/style2.jpg', path='out/a.png',
+def run(content_path='static/content/a.jpg', style_path='style/style2.jpg', path='static/out/a.png',
         num_iterations=1000,
         content_weight=1e3,
         style_weight=1e-2):
