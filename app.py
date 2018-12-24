@@ -18,7 +18,7 @@ use = 0
 def upload():
     n = get_num()
     if n == 0 and request.method == 'POST':
-        if request.form['content'] == 'no':
+        if request.form['content'] != 'yes':
             return "No Content Image!"
         elif request.form['style'] == 'no':
             return "No Style Image!"
@@ -35,7 +35,6 @@ def upload():
         f1 = request.files['file1']
         content_path = os.path.join('static', path[0], secure_filename(f1.filename))
         f1.save(content_path)
-        set_num(1)
         return render_template("get.html", f1=content_path, f2=style_path)
     return "请求错误或迁移程序正在运行中，请稍后再试！"
 
@@ -49,6 +48,7 @@ def get():
     content_path = f1
     style_path = f2
     print(content_path, style_path)
+    set_num(1)
     run(content_path=content_path, style_path=style_path, path=name, num_iterations=100)
     # 取消base64返回格式, 返回图片路径
     set_num(0)
@@ -72,10 +72,10 @@ def favicon():
 def android():
     n = get_num()
     if n == 0 and request.method == 'POST':
-        if request.form['content'] == 'no':
-            return "No Content Image!"
+        if request.form['content'] != 'yes':
+            return jsonify({"msg": "Error: No Content Image!"})
         elif request.form['style'] == 'no':
-            return "No Style Image!"
+            return jsonify({"msg": "Error: No Style Image!"})
         elif request.form['style'] == 'yes':
             f2 = request.files['file2']
             style_path = os.path.join('static', path[1], secure_filename(f2.filename))
@@ -85,7 +85,7 @@ def android():
             if os.path.exists(f2):
                 style_path = f2
             else:
-                return "Error: 该风格图不存在"
+                return jsonify({"msg": "Error: 该风格图不存在"})
         f1 = request.files['file1']
         content_path = os.path.join('static', path[0], secure_filename(f1.filename))
         f1.save(content_path)
@@ -95,8 +95,8 @@ def android():
         print(content_path, style_path)
         run(content_path=content_path, style_path=style_path, path=name, num_iterations=100)
         set_num(0)
-        return name
-    return "请求错误或迁移程序正在运行中，请稍后再试！"
+        return jsonify({'name': name})
+    return jsonify({"msg": "请求错误或迁移程序正在运行中，请稍后再试！"})
 
 
 def get_num():
