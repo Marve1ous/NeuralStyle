@@ -102,6 +102,13 @@
                 var img = document.getElementById(name);
                 reader.onload = function () {
                     img.innerHTML = `<img src=${this.result} width="100%" height="100%" alt="content" class="img-rounded"/>`
+                    if (id[1]==="1")
+                        document.getElementById("c").value = "yes";
+                    else if (id[1] === "2") {
+                        var s = document.getElementById("s");
+                        s.value = "yes";
+                        s.checked = true;
+                    }
                 };
                 reader.readAsDataURL(f);
             }
@@ -199,6 +206,7 @@
         <form action="upload" enctype="multipart/form-data" id="form1" method="POST" target="img">
             <div class="col-md-6" style="height: 500px">
                 <h3>内容图</h3>
+                <input id="c" type="radio" name="content" value="no" checked hidden/>
                 <div id="img1" style="height: 420px">
 
                 </div>
@@ -211,6 +219,7 @@
             </div>
             <div class="col-md-6" style="height: 500px">
                 <h3>风格图</h3>
+                <input id="s" type="radio" name="style" value="no" checked hidden/>
                 <div id="img2" style="height: 420px">
 
                 </div>

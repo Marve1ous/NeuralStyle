@@ -18,17 +18,17 @@ use = 0
 def upload():
     n = get_num()
     if n == 0 and request.method == 'POST':
-        if request.files['file1'] is None:
+        if request.form['content'] == 'no':
             return "No Content Image!"
-        elif request.form['style'] is None and request.files['file2'] is None:
+        elif request.form['style'] == 'no':
             return "No Style Image!"
-        elif request.form['style'] is not None:
-            f2 = request.form['style']
-            style_path = f2
-        else:
+        elif request.form['style'] == 'yes':
             f2 = request.files['file2']
             style_path = os.path.join('static', path[1], secure_filename(f2.filename))
             f2.save(style_path)
+        else:
+            f2 = request.form['style']
+            style_path = f2
         f1 = request.files['file1']
         content_path = os.path.join('static', path[0], secure_filename(f1.filename))
         f1.save(content_path)
@@ -63,6 +63,34 @@ def index():
 def favicon():
     return send_from_directory(os.path.join(app.root_path, 'static'),
                                'favicon.ico', mimetype='image/vnd.microsoft.icon')
+
+
+@app.route('/android', methods=['POST', 'GET'])
+def android():
+    n = get_num()
+    if n == 0 and request.method == 'POST':
+        if request.form['content'] == 'no':
+            return "No Content Image!"
+        elif request.form['style'] == 'no':
+            return "No Style Image!"
+        elif request.form['style'] == 'yes':
+            f2 = request.files['file2']
+            style_path = os.path.join('static', path[1], secure_filename(f2.filename))
+            f2.save(style_path)
+        else:
+            f2 = request.form['style']
+            style_path = f2
+        f1 = request.files['file1']
+        content_path = os.path.join('static', path[0], secure_filename(f1.filename))
+        f1.save(content_path)
+        set_num(1)
+        s = style_path.split('/')[2].split('.')[0] + '_' + content_path.split('/')[2]
+        name = os.path.join('static', 'out', s)
+        print(content_path, style_path)
+        run(content_path=content_path, style_path=style_path, path=name, num_iterations=100)
+        set_num(0)
+        return name
+    return "Error"
 
 
 def get_num():
