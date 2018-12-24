@@ -28,13 +28,16 @@ def upload():
             f2.save(style_path)
         else:
             f2 = request.form['style']
-            style_path = f2
+            if os.path.exists(f2):
+                style_path = f2
+            else:
+                return "Error: 该风格图不存在"
         f1 = request.files['file1']
         content_path = os.path.join('static', path[0], secure_filename(f1.filename))
         f1.save(content_path)
         set_num(1)
         return render_template("get.html", f1=content_path, f2=style_path)
-    return "Error"
+    return "请求错误或迁移程序正在运行中，请稍后再试！"
 
 
 @app.route('/get', methods=['GET', 'POST'])
@@ -79,7 +82,10 @@ def android():
             f2.save(style_path)
         else:
             f2 = request.form['style']
-            style_path = f2
+            if os.path.exists(f2):
+                style_path = f2
+            else:
+                return "Error: 该风格图不存在"
         f1 = request.files['file1']
         content_path = os.path.join('static', path[0], secure_filename(f1.filename))
         f1.save(content_path)
@@ -90,7 +96,7 @@ def android():
         run(content_path=content_path, style_path=style_path, path=name, num_iterations=100)
         set_num(0)
         return name
-    return "Error"
+    return "请求错误或迁移程序正在运行中，请稍后再试！"
 
 
 def get_num():
