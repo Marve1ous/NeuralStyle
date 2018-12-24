@@ -2,7 +2,7 @@
 <html lang="ch">
 <head>
     <meta charset="UTF-8">
-    <link type="favicon" rel="shortcut icon" href="favicon.ico" />
+    <link type="favicon" rel="shortcut icon" href="favicon.ico"/>
     <title>图像风格迁移</title>
     <style type="text/css">
         * {
@@ -10,29 +10,32 @@
             padding: 0;
             text-align: center;
         }
-        html,body{
-            height:max-content;
+
+        html, body {
+            height: max-content;
             width: 100%;
             position: absolute;
         }
+
         .bg {
-            position:absolute;
+            position: absolute;
             float: left;
             z-index: -100;
             height: 100%;
             width: 100%;
-            background:url('../static/back.jpg');
-            background-repeat:  repeat;
+            background: url('../static/back.jpg') repeat;
             background-size: cover;
         }
-        .bg-bulr{
+
+        .bg-bulr {
             -webkit-filter: blur(15px);
             -moz-filter: blur(15px);
             -o-filter: blur(15px);
             -ms-filter: blur(15px);
             filter: blur(15px);
         }
-        #img1,#img2,#fram{
+
+        #img1, #img2, #fram {
             border: 2px dashed #bbb;
             border-radius: 5px;
             text-align: center;
@@ -43,22 +46,52 @@
             margin: 0;
         }
 
-        #carousel-example-generic{
+        #carousel-example-generic {
             width: 100%;
             height: 500px;
         }
-        .carousel-inner,.item{
+
+        .carousel-inner, .item {
             height: 500px;
-            width:100%;
+            width: 100%;
         }
-        .carousel-img{
+
+        .carousel-img {
             width: 100%;
             height: 100%;
         }
+
         /* .thumbnail{
             width: 100px;
             height: 100px;
         } */
+
+        .inline {
+            display: inline-block;
+            width: 100%;
+            height: 350px;
+            border: 2px dashed #bbb;
+            border-radius: 5px;
+            text-align: center;
+            color: #bbb;
+            padding: 0;
+            margin: 0;
+        }
+
+        .inline2 {
+            display: inline-block;
+            width: 19%;
+            height: 200px;
+            text-align: center;
+            color: #bbb;
+            padding: 0;
+            margin: 0;
+        }
+
+        .borderimg {
+            border-radius: 5px;
+        }
+
     </style>
     <script>
         function deal(id) {
@@ -69,149 +102,230 @@
                 var img = document.getElementById(name);
                 reader.onload = function () {
                     img.innerHTML = `<img src=${this.result} width="100%" height="100%" alt="content" class="img-rounded"/>`
+                    if (id[1]==="1")
+                        document.getElementById("c").value = "yes";
+                    else if (id[1] === "2") {
+                        var s = document.getElementById("s");
+                        s.value = "yes";
+                        s.checked = true;
+                    }
                 };
                 reader.readAsDataURL(f);
             }
         }
-        
-        function putlocalstylepic(id){
-            imgpath = document.getElementById(id).innerHTML.split("\"")[1];
-            console.log(imgpath)
-            document.getElementById('img2').innerHTML=`<img src="`+imgpath+ `" width="100%" height="100%" alt="content" class="img-rounded"/>`;
+
+        function putlocalstylepic(id) {
+            imgpath = document.getElementById(id).innerHTML.split("\"")[7];
+            console.log(imgpath);
+            document.getElementById('img2').innerHTML = `<img src="` + imgpath + `" width="100%" height="100%" alt="content" class="img-rounded"/>`;
         }
+
         function resetpic() {
-            document.getElementById('img1').innerHTML="";
-            document.getElementById('img2').innerHTML="";
+            document.getElementById('img1').innerHTML = "";
+            document.getElementById('img2').innerHTML = "";
         }
-        function loadFile(file){
+
+        function loadFile(file) {
             $("#filename").html(file.name);
         }
     </script>
-    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
     <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-<!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
-<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script></head>
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+</head>
 <body>
-    <div class="bg bg-bulr">
+<div class="bg bg-bulr">
 
+</div>
+<div class="container">
+    <!-- 标题 -->
+    <div class="row">
+        <br><br>
+        <h1 style="margin: 0">图像风格迁移</h1>
     </div>
-    <div class="container">
-        <!-- 标题 -->
-        <div class="row">
-            <br><br>
-            <h1 style="margin: 0px">图像风格迁移</h1>
-        </div>
-        <!-- 轮播图展示 -->
-        <div class="row">
-            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-                <!-- Indicators -->
-                <ol class="carousel-indicators">
-                    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-                    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-                </ol>
-                <!-- Wrapper for slides -->
-                <div class="carousel-inner" role="listbox">
-                    <div class="item active">
-                        <img class="carousel-img" src="../static/style1.jpg" alt="...">
-                        <div class="carousel-caption">
-                            <h3>我们的作品</h3>
-                            <h4>Pic1</h4>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <img class="carousel-img" src="../static/style2.jpg" alt="...">
-                        <div class="carousel-caption">
-                            <h3>我们的作品</h3>
-                            <h4>Pic1</h4>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <img class="carousel-img" src="../static/style3.jpg" alt="...">
-                        <div class="carousel-caption">
-                            <h3>我们的作品</h3>
-                            <h4>Pic1</h4>
-                        </div>
+    <!-- 轮播图展示 -->
+    <div class="row">
+        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+            </ol>
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner" role="listbox">
+                <div class="item active">
+                    <img class="carousel-img" src="../static/style/style1.jpg" alt="...">
+                    <div class="carousel-caption">
+                        <h2>我们的作品</h2>
+                        <h3>Pic1</h3>
                     </div>
                 </div>
-                
-                <!-- Controls -->
-                <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
+                <div class="item">
+                    <img class="carousel-img" src="../static/style/style2.jpg" alt="...">
+                    <div class="carousel-caption">
+                        <h2>我们的作品</h2>
+                        <h3>Pic2</h3>
+                    </div>
+                </div>
+                <div class="item">
+                    <img class="carousel-img" src="../static/style/style3.jpg" alt="...">
+                    <div class="carousel-caption">
+                        <h2>我们的作品</h2>
+                        <h3>Pic3</h3>
+                    </div>
+                </div>
             </div>
-        </div>
-        
-       
-        <div class="row"> 
-            <form action="upload" enctype="multipart/form-data" id="form1" method="POST" target="img">
-                <div class="col-md-4">
-                    <h3>内容图</h3>
-                    <div id="img1">
 
-                    </div>
-                    <div class="file-container" style="display:inline-block;position:relative;overflow: hidden;vertical-align:middle">
-                        <button class="btn btn-primary fileinput-button" type="button">上传</button>
-                        <input type="file" id="f1" name="file1" onchange="deal(this.id)" style="position:absolute;top:0;left:0;font-size:34px; opacity:0">
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <h3>风格图</h3>
-                    <div id="img2">
-
-                    </div>
-                    <div class="file-container" style="display:inline-block;position:relative;overflow: hidden;vertical-align:middle">
-                        <button class="btn btn-primary fileinput-button" type="button">上传</button>
-                        <input type="file" id="f2" name="file2" onchange="deal(this.id)" style="position:absolute;top:0;left:0;font-size:34px; opacity:0">
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <h3>迁移图</h3>
-                    <div>
-                        <iframe id="fram" name="img" width="100%" height="300px" scrolling="no">
-                        </iframe>
-                        <input class="btn btn-success" type="submit" value="上传"/>
-                        <input class="btn btn-danger" type="reset" onclick="resetpic()" value="重新上传"/>
-                    </div>
-                </div>
-            </form>
+            <!-- Controls -->
+            <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
         </div>
-        
-        <div class="row">
-            <h3>备选风格图</h3>
-            <div class="col-md-3">
-            </div>
-            <div class="col-md-1">
-                <div class="thumbnail" id="p1" onclick="putlocalstylepic('p1')" style="margin:0px"><img src="../static/style1.jpg"></div>
-            </div>
-            <div class="col-md-1">
-                <div class="thumbnail" id="p2" onclick="putlocalstylepic('p2')" style="margin:0px"><img src="../static/style2.jpg"></div>
-            </div>
-            <div class="col-md-1">
-                <div class="thumbnail" id="p3" onclick="putlocalstylepic('p3')" style="margin:0px"><img src="../static/style3.jpg"></div>
-            </div>
-            <div class="col-md-1">
-                <div class="thumbnail" id="p4" onclick="putlocalstylepic('p4')" style="margin:0px"><img src="../static/style4.jpg"></div>
-            </div>
-            <div class="col-md-1">
-                <div class="thumbnail" id="p5" onclick="putlocalstylepic('p5')" style="margin:0px"><img src="../static/style5.jpg"></div>
-            </div>
-            <div class="col-md-1">
-                <div class="thumbnail" id="p6" onclick="putlocalstylepic('p6')" style="margin:0px"><img src="../static/style1.jpg"></div>
-            </div>
-            <div class="col-md-3">
-            </div>
-        `</div>
     </div>
+
+
+    <div class="row">
+        <form action="upload" enctype="multipart/form-data" id="form1" method="POST" target="img">
+            <div class="col-md-6" style="height: 500px">
+                <h3>内容图</h3>
+                <input id="c" type="radio" name="content" value="no" checked hidden/>
+                <div id="img1" style="height: 420px">
+
+                </div>
+                <div class="file-container"
+                     style="display:inline-block;position:relative;overflow: hidden;vertical-align:middle">
+                    <button class="btn btn-primary fileinput-button" type="button">上传</button>
+                    <input type="file" id="f1" name="file1" onchange="deal(this.id)"
+                           style="position:absolute;top:0;left:0;font-size:34px; opacity:0" accept="image/jpeg">
+                </div>
+            </div>
+            <div class="col-md-6" style="height: 500px">
+                <h3>风格图</h3>
+                <input id="s" type="radio" name="style" value="no" checked hidden/>
+                <div id="img2" style="height: 420px">
+
+                </div>
+                <div class="file-container"
+                     style="display:inline-block;position:relative;overflow: hidden;vertical-align:middle">
+                    <button class="btn btn-primary fileinput-button" type="button">上传</button>
+                    <input type="file" id="f2" name="file2" onchange="deal(this.id)"
+                           style="position:absolute;top:0;left:0;font-size:34px; opacity:0" accept="image/jpeg">
+                </div>
+            </div>
+            <div class="col-md-12" style="height: 800px;">
+                <h3>迁移图</h3>
+                <div>
+                    <iframe id="fram" name="img" width="100%" height="400px" scrolling="no" style="height: 720px">
+                    </iframe>
+                    <input class="btn btn-success" type="submit" value="上传"/>
+                    <input class="btn btn-danger" type="reset" onclick="resetpic()" value="重新上传"/>
+                </div>
+            </div>
+        </form>
+    </div>
+    <br>
+
+    <div class="row" style="width: 100%">
+        <h3>备选风格图</h3>
+        <div class="col-md-6">
+            <h4>Style1</h4>
+            <div class="inline " id="p1">
+                <label class="inline">
+                    <img class="borderimg" onclick="putlocalstylepic('p1')" src="../static/style/style1.jpg"
+                         alt="style1" width="100%"
+                         height="100%">
+                    <input name="style" type="radio" value="static/style/style1.jpg" form="form1" hidden>
+                </label>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h4>Style2</h4>
+            <div class="inline" id="p2">
+                <label class="inline">
+                    <img class="borderimg" onclick="putlocalstylepic('p2')" src="../static/style/style2.jpg"
+                         alt="style2" width="100%"
+                         height="100%">
+                    <input name="style" type="radio" value="static/style/style2.jpg" form="form1" hidden>
+                </label>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <h4>Style3</h4>
+            <div class="inline" id="p3">
+                <label class="inline">
+                    <img class="borderimg" onclick="putlocalstylepic('p3')" src="../static/style/style3.jpg"
+                         alt="style3" width="100%"
+                         height="100%">
+                    <input name="style" type="radio" value="static/style/style3.jpg" form="form1" hidden>
+                </label>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <h4>Style4</h4>
+            <div class="inline" id="p4">
+                <label class="inline">
+                    <img class="borderimg" onclick="putlocalstylepic('p4')" src="../static/style/style4.jpg"
+                         alt="style4" width="100%"
+                         height="100%">
+                    <input name="style" type="radio" value="static/style/style4.jpg" form="form1" hidden>
+                </label>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <h4>Style5</h4>
+            <div class="inline" id="p5">
+                <label class="inline">
+                    <img class="borderimg" onclick="putlocalstylepic('p5')" src="../static/style/style5.jpg"
+                         alt="style5" width="100%"
+                         height="100%">
+                    <input name="style" type="radio" value="static/style/style5.jpg" form="form1" hidden>
+                </label>
+            </div>
+        </div>
+        </form>
+    </div>
+
+    <!--<div style="width: 100%" class="row">-->
+    <!--<h3>备选风格图</h3>-->
+    <!--<div class="inline2 " id="p1">-->
+    <!--<img onclick="putlocalstylepic('p1')" src="../static/style/style1.jpg" alt="style1" width="100%"-->
+    <!--height="100%">-->
+    <!--</div>-->
+    <!--<div class="inline2" id="p2">-->
+    <!--<img onclick="putlocalstylepic('p2')" src="../static/style/style2.jpg" alt="style2" width="100%"-->
+    <!--height="100%">-->
+    <!--</div>-->
+    <!--<div class="inline2" id="p3">-->
+    <!--<img onclick="putlocalstylepic('p3')" src="../static/style/style3.jpg" alt="style3" width="100%"-->
+    <!--height="100%">-->
+    <!--</div>-->
+    <!--<div class="inline2" id="p4">-->
+    <!--<img onclick="putlocalstylepic('p4')" src="../static/style/style4.jpg" alt="style4" width="100%"-->
+    <!--height="100%">-->
+    <!--</div>-->
+    <!--<div class="inline2" id="p5">-->
+    <!--<img onclick="putlocalstylepic('p5')" src="../static/style/style5.jpg" alt="style5" width="100%"-->
+    <!--height="100%">-->
+    <!--</div>-->
+    <!--</div>-->
+</div>
 </body>
 </html>
